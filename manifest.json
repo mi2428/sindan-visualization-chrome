@@ -5,8 +5,7 @@
   "description": "iii",
   "permissions": [
     "tabs",
-    "activeTab",
-    "scripting"
+    "notifications"
   ],
   "content_scripts": [{
     "matches": ["*://*/*"],

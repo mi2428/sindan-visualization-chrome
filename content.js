@@ -49,6 +49,23 @@ const parse_campaign_list = () => {
 }
 
 
+const replace_campaign_list = (hosts) => {
+  let i = 1
+
+  while (true) {
+    const row = `body > div.container > div > div > table > tbody > tr:nth-child(${i})`
+    const em = document.querySelector(`${row} > td:nth-child(3) > a`)
+
+    if (em === null) break
+
+    const mac = em.textContent.trim()
+    if (mac in hosts) em.textContent = `${hosts[mac]} (${mac})`
+
+    i += 1
+  }
+}
+
+
 const is_dead = (timestamps, thr_min) => {
   const current = new Date().getTime()
   const last = new Date(timestamps[0])
@@ -74,12 +91,20 @@ const extract_dead_macs = (parsed_campaigns, thr_min) => {
 
 const dead_thr_min = 1
 
-if (is_campaign_page) {
+if (is_campaign_page()) {
   const e = document.querySelector("body > div.container > div > div > div")
   const data = parse_campaign_list()
   const macs = extract_dead_macs(data, dead_thr_min)
 
+  const mac_to_host = {"dc:a6:32:cd:1a:ab": "node A", "00:22:cf:fd:6f:76": "node B"}
+  replace_campaign_list(mac_to_host)
+
   for (var mac of macs) {
-    e.insertAdjacentHTML("afterend", `<p class="alert alert-warning" style="margin-bottom: 5px !important;"><strong>死んだかも：</strong> ${mac} からの計測データが${dead_thr_min}分以上途絶しています</p>`)
+    let name = mac
+    if (mac in mac_to_host) name = `${mac_to_host[mac]} (${mac})`
+    e.insertAdjacentHTML("afterend", `<p class="alert alert-warning" style="margin-bottom: 5px !important;"><strong>死んだかも：</strong> ${name} からの計測データが${dead_thr_min}分以上途絶しています</p>`)
   }
 }
+
+
+chrome.runtime.sendMessage("aaaa aaa")
