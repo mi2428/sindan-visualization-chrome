@@ -5,6 +5,7 @@
   "description": "For ShowNet 2022",
   "permissions": [
     "tabs",
+    "alarms",
     "notifications"
   ],
   "content_scripts": [{
