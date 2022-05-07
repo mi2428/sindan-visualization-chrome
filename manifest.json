@@ -1,8 +1,8 @@
 {
-  "name": "SINDAN Visualization Helper",
+  "name": "SINDAN Visualization",
   "version": "1.0",
   "manifest_version": 3,
-  "description": "iii",
+  "description": "For ShowNet 2022",
   "permissions": [
     "tabs",
     "notifications"
@@ -15,6 +15,9 @@
   }],
   "background": {
     "service_worker": "background.js"
+  },
+  "icons": {
+    "128": "/icons/sindan.png"
   },
   "action": {}
 }
