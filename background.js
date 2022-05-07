@@ -7,3 +7,15 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   });
   sendResponse()
 });
+
+
+const refresh_interval = 3  // minutes
+
+setInterval(() => {
+  chrome.tabs.query({title: "ログキャンペーン一覧 | SINDAN VISUALIZATION"}, tabs => {
+    for (let tab of tabs) {
+      chrome.tabs.reload(tab.id);
+    }
+  });
+  console.log("reloaded");
+}, refresh_interval * 60 * 1000);
