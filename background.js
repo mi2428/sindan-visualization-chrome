@@ -1,9 +1,9 @@
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   chrome.notifications.create({
     type: "basic",
-    title: "test",
+    title: message.title,
+    message: message.message,
     iconUrl: "./icons/sindan.png",
-    message: message,
   });
   sendResponse()
 });
