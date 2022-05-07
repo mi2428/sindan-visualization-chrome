@@ -9,7 +9,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 });
 
 
-const refresh_interval = 3  // minutes
+const refresh_interval = 1  // minutes
 
 setInterval(() => {
   chrome.tabs.query({title: "ログキャンペーン一覧 | SINDAN VISUALIZATION"}, tabs => {
